@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <main class="page__main">
+        <section class="section section--fluid section--top">
+            <div class="section__container">
+                <div class="section__row">
+                    <div class="section__col">
+                        <h1 class="main-title main-title--order js-cart-title">Оформить заказ</h1>
+                        <div class="cart">
+                            <form class="cart__form" action="#" method="POST">
+                                <ul class="cart__list">
+                                    {% for item in items %}
+                                        <li class="cart__item">
+                                            <div class="cart__item-inner">
+                                                <div class="cart__col-img">
+                                                    <a class="cart__img-wrap" href="catalog-item.html">
+                                                        <div class="cart__img-ratio">
+                                                            <picture>
+                                                                <img class="cart__img" src="{{ item.item.main_photo_xs.url }}" srcset="img/cart-img-01--xs@2x.jpg 2x" alt="">
+                                                            </picture>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div class="cart__col-desc">
+                                                    <h2 class="cart__title">
+                                                        <a class="cart__title-link" href="javascript:void(0);">{{ item.item.name }}</a>
+                                                    </h2>
+                                                </div>
+                                                <div class="cart__col-price">
+                                                    <div class="price price--theme_black price--cart">
+                                                        <div class="price__value">{{ item.item.price_rub }}<span class="price__unit">&nbsp;₽</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="cart__col-counter">
+                                                    <div class="counter">
+                                                        <button class="counter__btn counter__btn--plus js-counter-plus" type="button">
+                                                            <span class="visuallyhidden">Больше</span>
+                                                        </button>
+                                                        <div class="counter__input-wrap">
+                                                            <input class="counter__input" type="number" value="{{ item.amount }}" data-price="2200">
+                                                        </div>
+                                                        <button class="counter__btn counter__btn--minus js-counter-minus" type="button" disabled>
+                                                            <span class="visuallyhidden">Меньше</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="cart__col-total">
+                                                    <div class="price price--cart">
+                                                        <div class="price__value"><span class="js-sub-total">2&nbsp;200</span><span class="price__unit">&nbsp;₽</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="cart__col-remove">
+                                                    <button class="btn-close js-cart-item-remove" type="button"></button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                <div class="cart__footer">
+                                    <div class="cart__footer-total">
+                                        <div class="cart__footer-title">Итого</div>
+                                        <div class="input-wrap cart__input-wrap">
+                                            <input class="form-input cart__form-input" type="text" name="cart-promo" id="cart-promo" placeholder="Промо-код">
+                                        </div>
+                                    </div>
+                                    <div class="cart__footer-price">
+                                        <div class="price">
+                                            <div class="price__value">
+                                                <span id="cart-total-price"></span><span class="price__unit">&nbsp;₽</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cart__footer-btn">
+                                        <button class="btn cart__btn" type="submit">Оформить заказ</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

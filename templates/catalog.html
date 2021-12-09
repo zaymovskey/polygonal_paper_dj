@@ -1,0 +1,612 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <main class="page__main">
+        <h1 class="visuallyhidden">Каталог</h1>
+        <section class="section section--top">
+            <div class="section__container">
+                <div class="section__row">
+                    <div class="section__col">
+                        <div class="c-filter">
+                            <div class="c-filter__row">
+                                <div class="c-filter__products">
+                                    <div class="tabs js-tabs">
+                                        <div class="tabs__select">
+                                            <select class="tabs-select form-select c-filter__tabs-select js-form-select js-tabs-select-trigger">
+                                                {% for category in categories %}
+                                                    <option value="tab-{{ forloop.counter }}">{{ category.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="tabs__list">
+                                            <ul class="tabs-list c-filter__tabs-list">
+                                                {% for category in categories %}
+                                                    {% url 'category_items_view' category.slug as category_items_url %}
+                                                    <a href="{% url 'category_items_view' category.slug %}"
+                                                       class="tabs-list__item js-tabs-trigger
+                                                        {% if category_items_url in request.path %}tabs-list__item--active{% endif %}"
+                                                       data-tab="tab-{{ forloop.counter }}">
+                                                        {{ category.name }}
+                                                    </a>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="c-filter__row">
+                                <div class="c-filter__types">
+                                    <ul class="filter-list">
+                                        {% url 'category_items_view' category_slug as category_items_url %}
+                                        <li class="filter-list__item {% if request.path == category_items_url %}filter-list__item--active{% endif %}">
+                                            <a style="color: inherit" href="{% url 'category_items_view' category_slug %}">Все</a>
+                                        </li>
+                                        {% for subcategory in subcategories %}
+                                            {% url 'category_subcategory_items_view' category_slug subcategory.slug as category_subcategory_items_url %}
+                                            <li class="filter-list__item {% if request.path == category_subcategory_items_url %}filter-list__item--active{% endif %}">
+                                                <a style="color: inherit" href="{% url 'category_subcategory_items_view' category_slug subcategory.slug %}"
+                                                   class="filter-list__item-link">
+                                                    {{ subcategory.name }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="c-filter__price">
+                                    <select class="tabs-select form-select form-select--size_small js-form-select">
+                                        <option value="filter-price-sorting-1">Цена по возрастанию</option>
+                                        <option value="filter-price-sorting-2">Цена по убыванию</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="tabs-content c-filter__tabs-content tabs-content--active" data-tab-content="tab-1">
+                                <div class="catalog-list">
+                                    <div class="catalog-list__row">
+                                        {% for item in items %}
+                                            <div class="catalog-list__col">
+                                                <div class="c-card c-card--model">
+                                                    <a class="c-card__img-wrap" href="{% url 'item_view' category_slug item.category.slug item.slug %}">
+                                                        <div class="c-card__img-ratio">
+                                                            <picture>
+                                                                <source media="(min-width: 2560px)" srcset="{{ item.main_photo_xxl.url }} 1x, {{ item.main_photo_xxl2.url }} 2x">
+                                                                <img class="c-card__img" src="{{ item.main_photo_xs.url }}" srcset="{{ item.main_photo_xs2.url }} 2x" width="728" height="546" alt="">
+                                                            </picture>
+                                                        </div>
+                                                    </a>
+                                                    <div class="c-card__content">
+                                                        <h3 class="c-card__title">
+                                                            <a class="c-card__title-link" href="catalog-item.html">{{ item.name }}</a>
+                                                        </h3>
+                                                        <div class="c-card__footer">
+                                                            <div class="price price--c-card">
+                                                                {% if item.discount_set.first %}
+                                                                    <div class="price__value price__value--old">
+                                                                        {{ item.discount_set.first.amount }}
+                                                                        <span class="price__unit">&nbsp;₽</span>
+                                                                    </div>
+                                                                {% endif %}
+                                                                <div class="price__value">{{ item.price_rub }}<span class="price__unit">&nbsp;₽</span></div>
+                                                            </div>
+                                                            <div class="c-card__buttons">
+                                                                <!--todo: Если товар в сравнении, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                                <button class="btn-count btn-count--short btn-count--card" type="button">
+                                                                    <div class="btn-count__icon-wrap">
+                                                                        <svg class="btn-count__icon" viewBox="0 0 32 25" width="32" height="25">
+                                                                            <use xlink:href="img/sprite.svg#icon-compare"></use>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <span class="btn-count__title">Сравнить</span>
+                                                                </button>
+                                                                <!--todo: Если товар в корзине, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                                <a href="{% url 'add_to_cart_view' item.slug %}">
+                                                                    <button class="btn-count btn-count--buy btn-count--card" type="button">
+                                                                        <div class="btn-count__icon-wrap">
+                                                                            <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                                <use xlink:href="{% static 'img/sprite.svg' %}#icon-cart"></use>
+                                                                            </svg>
+                                                                            <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                                <use xlink:href="{% static 'img/sprite.svg' %}#icon-btn-cart-check"></use>
+                                                                            </svg>
+                                                                        </div>
+                                                                        <span class="btn-count__title">В корзину</span>
+                                                                    </button>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <!--todo: спиннер для индикации подгрузки элементов -->
+                                <div class="preloader preloader--catalog">
+                                    <div class="preloader__spinner"></div>
+                                </div>
+                            </div>
+                            <div class="tabs-content c-filter__tabs-content" data-tab-content="tab-2">
+                                <div class="catalog-list">
+                                    <div class="catalog-list__row">
+                                        <div class="catalog-list__col">
+                                            <div class="c-card c-card--model">
+                                                <a class="c-card__img-wrap" href="catalog-item.html">
+                                                    <div class="c-card__img-ratio">
+                                                        <picture>
+                                                            <source media="(min-width: 2560px)" srcset="img/product-card-img-01--xxl.jpg 1x, img/product-card-img-01--xxl@2x.jpg 2x">
+                                                            <img class="c-card__img" src="img/product-card-img-01--xs.jpg" srcset="img/product-card-img-01--xs@2x.jpg 2x" width="728" height="546" alt="">
+                                                        </picture>
+                                                    </div>
+                                                </a>
+                                                <div class="c-card__content">
+                                                    <h3 class="c-card__title">
+                                                        <a class="c-card__title-link" href="catalog-item.html">Набор для склейки кролика&nbsp;L (белый)</a>
+                                                    </h3>
+                                                    <div class="c-card__footer">
+                                                        <div class="price price--c-card">
+                                                            <div class="price__value">1&nbsp;700<span class="price__unit">&nbsp;₽</span></div>
+                                                        </div>
+                                                        <div class="c-card__buttons">
+                                                            <!--todo: Если товар в сравнении, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--short btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 32 25" width="32" height="25">
+                                                                        <use xlink:href="img/sprite.svg#icon-compare"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">Сравнить</span>
+                                                            </button>
+                                                            <!--todo: Если товар в корзине, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--buy btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart"></use>
+                                                                    </svg>
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart-check"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">В корзину</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="catalog-list__col">
+                                            <div class="c-card c-card--model">
+                                                <a class="c-card__img-wrap" href="catalog-item.html">
+                                                    <div class="c-card__img-ratio">
+                                                        <picture>
+                                                            <source media="(min-width: 2560px)" srcset="img/product-card-img-01--xxl.jpg 1x, img/product-card-img-01--xxl@2x.jpg 2x">
+                                                            <img class="c-card__img" src="img/product-card-img-01--xs.jpg" srcset="img/product-card-img-01--xs@2x.jpg 2x" width="728" height="546" alt="">
+                                                        </picture>
+                                                    </div>
+                                                </a>
+                                                <div class="c-card__content">
+                                                    <h3 class="c-card__title">
+                                                        <a class="c-card__title-link" href="catalog-item.html">Набор для склейки кролика&nbsp;L (белый)</a>
+                                                    </h3>
+                                                    <div class="c-card__footer">
+                                                        <div class="price price--c-card">
+                                                            <div class="price__value">1&nbsp;700<span class="price__unit">&nbsp;₽</span></div>
+                                                        </div>
+                                                        <div class="c-card__buttons">
+                                                            <!--todo: Если товар в сравнении, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--short btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 32 25" width="32" height="25">
+                                                                        <use xlink:href="img/sprite.svg#icon-compare"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">Сравнить</span>
+                                                            </button>
+                                                            <!--todo: Если товар в корзине, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--buy btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart"></use>
+                                                                    </svg>
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart-check"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">В корзину</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="preloader preloader--catalog">
+                                    <div class="preloader__spinner"></div>
+                                </div>
+                            </div>
+                            <div class="tabs-content c-filter__tabs-content" data-tab-content="tab-3">
+                                <div class="catalog-list">
+                                    <div class="catalog-list__row">
+                                        <div class="catalog-list__col">
+                                            <div class="c-card c-card--model">
+                                                <a class="c-card__img-wrap" href="catalog-item.html">
+                                                    <div class="c-card__img-ratio">
+                                                        <picture>
+                                                            <source media="(min-width: 2560px)" srcset="img/product-card-img-01--xxl.jpg 1x, img/product-card-img-01--xxl@2x.jpg 2x">
+                                                            <img class="c-card__img" src="img/product-card-img-01--xs.jpg" srcset="img/product-card-img-01--xs@2x.jpg 2x" width="728" height="546" alt="">
+                                                        </picture>
+                                                    </div>
+                                                </a>
+                                                <div class="c-card__content">
+                                                    <h3 class="c-card__title">
+                                                        <a class="c-card__title-link" href="catalog-item.html">Набор для склейки кролика&nbsp;L (белый)</a>
+                                                    </h3>
+                                                    <div class="c-card__footer">
+                                                        <div class="price price--c-card">
+                                                            <div class="price__value">1&nbsp;700<span class="price__unit">&nbsp;₽</span></div>
+                                                        </div>
+                                                        <div class="c-card__buttons">
+                                                            <!--todo: Если товар в сравнении, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--short btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 32 25" width="32" height="25">
+                                                                        <use xlink:href="img/sprite.svg#icon-compare"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">Сравнить</span>
+                                                            </button>
+                                                            <!--todo: Если товар в корзине, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--buy btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart"></use>
+                                                                    </svg>
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart-check"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">В корзину</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="catalog-list__col">
+                                            <div class="c-card c-card--model">
+                                                <a class="c-card__img-wrap" href="catalog-item.html">
+                                                    <div class="c-card__img-ratio">
+                                                        <picture>
+                                                            <source media="(min-width: 2560px)" srcset="img/product-card-img-01--xxl.jpg 1x, img/product-card-img-01--xxl@2x.jpg 2x">
+                                                            <img class="c-card__img" src="img/product-card-img-01--xs.jpg" srcset="img/product-card-img-01--xs@2x.jpg 2x" width="728" height="546" alt="">
+                                                        </picture>
+                                                    </div>
+                                                </a>
+                                                <div class="c-card__content">
+                                                    <h3 class="c-card__title">
+                                                        <a class="c-card__title-link" href="catalog-item.html">Набор для склейки кролика&nbsp;L (белый)</a>
+                                                    </h3>
+                                                    <div class="c-card__footer">
+                                                        <div class="price price--c-card">
+                                                            <div class="price__value">1&nbsp;700<span class="price__unit">&nbsp;₽</span></div>
+                                                        </div>
+                                                        <div class="c-card__buttons">
+                                                            <!--todo: Если товар в сравнении, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--short btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 32 25" width="32" height="25">
+                                                                        <use xlink:href="img/sprite.svg#icon-compare"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">Сравнить</span>
+                                                            </button>
+                                                            <!--todo: Если товар в корзине, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--buy btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart"></use>
+                                                                    </svg>
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart-check"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">В корзину</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="catalog-list__col">
+                                            <div class="c-card c-card--model">
+                                                <a class="c-card__img-wrap" href="catalog-item.html">
+                                                    <div class="c-card__img-ratio">
+                                                        <picture>
+                                                            <source media="(min-width: 2560px)" srcset="img/product-card-img-01--xxl.jpg 1x, img/product-card-img-01--xxl@2x.jpg 2x">
+                                                            <img class="c-card__img" src="img/product-card-img-01--xs.jpg" srcset="img/product-card-img-01--xs@2x.jpg 2x" width="728" height="546" alt="">
+                                                        </picture>
+                                                    </div>
+                                                </a>
+                                                <div class="c-card__content">
+                                                    <h3 class="c-card__title">
+                                                        <a class="c-card__title-link" href="catalog-item.html">Набор для склейки кролика&nbsp;L (белый)</a>
+                                                    </h3>
+                                                    <div class="c-card__footer">
+                                                        <div class="price price--c-card">
+                                                            <div class="price__value">1&nbsp;700<span class="price__unit">&nbsp;₽</span></div>
+                                                        </div>
+                                                        <div class="c-card__buttons">
+                                                            <!--todo: Если товар в сравнении, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--short btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 32 25" width="32" height="25">
+                                                                        <use xlink:href="img/sprite.svg#icon-compare"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">Сравнить</span>
+                                                            </button>
+                                                            <!--todo: Если товар в корзине, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--buy btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart"></use>
+                                                                    </svg>
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart-check"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">В корзину</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="preloader preloader--catalog">
+                                    <div class="preloader__spinner"></div>
+                                </div>
+                            </div>
+                            <div class="tabs-content c-filter__tabs-content" data-tab-content="tab-4">
+                                <div class="catalog-list">
+                                    <div class="catalog-list__row">
+                                        <div class="catalog-list__col">
+                                            <div class="c-card c-card--model">
+                                                <a class="c-card__img-wrap" href="catalog-item.html">
+                                                    <div class="c-card__img-ratio">
+                                                        <picture>
+                                                            <source media="(min-width: 2560px)" srcset="img/product-card-img-01--xxl.jpg 1x, img/product-card-img-01--xxl@2x.jpg 2x">
+                                                            <img class="c-card__img" src="img/product-card-img-01--xs.jpg" srcset="img/product-card-img-01--xs@2x.jpg 2x" width="728" height="546" alt="">
+                                                        </picture>
+                                                    </div>
+                                                </a>
+                                                <div class="c-card__content">
+                                                    <h3 class="c-card__title">
+                                                        <a class="c-card__title-link" href="catalog-item.html">Набор для склейки кролика&nbsp;L (белый)</a>
+                                                    </h3>
+                                                    <div class="c-card__footer">
+                                                        <div class="price price--c-card">
+                                                            <div class="price__value">1&nbsp;700<span class="price__unit">&nbsp;₽</span></div>
+                                                        </div>
+                                                        <div class="c-card__buttons">
+                                                            <!--todo: Если товар в сравнении, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--short btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 32 25" width="32" height="25">
+                                                                        <use xlink:href="img/sprite.svg#icon-compare"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">Сравнить</span>
+                                                            </button>
+                                                            <!--todo: Если товар в корзине, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--buy btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart"></use>
+                                                                    </svg>
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart-check"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">В корзину</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="catalog-list__col">
+                                            <div class="c-card c-card--model">
+                                                <a class="c-card__img-wrap" href="catalog-item.html">
+                                                    <div class="c-card__img-ratio">
+                                                        <picture>
+                                                            <source media="(min-width: 2560px)" srcset="img/product-card-img-01--xxl.jpg 1x, img/product-card-img-01--xxl@2x.jpg 2x">
+                                                            <img class="c-card__img" src="img/product-card-img-01--xs.jpg" srcset="img/product-card-img-01--xs@2x.jpg 2x" width="728" height="546" alt="">
+                                                        </picture>
+                                                    </div>
+                                                </a>
+                                                <div class="c-card__content">
+                                                    <h3 class="c-card__title">
+                                                        <a class="c-card__title-link" href="catalog-item.html">Набор для склейки кролика&nbsp;L (белый)</a>
+                                                    </h3>
+                                                    <div class="c-card__footer">
+                                                        <div class="price price--c-card">
+                                                            <div class="price__value">1&nbsp;700<span class="price__unit">&nbsp;₽</span></div>
+                                                        </div>
+                                                        <div class="c-card__buttons">
+                                                            <!--todo: Если товар в сравнении, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--short btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 32 25" width="32" height="25">
+                                                                        <use xlink:href="img/sprite.svg#icon-compare"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">Сравнить</span>
+                                                            </button>
+                                                            <!--todo: Если товар в корзине, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--buy btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart"></use>
+                                                                    </svg>
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart-check"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">В корзину</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="catalog-list__col">
+                                            <div class="c-card c-card--model">
+                                                <a class="c-card__img-wrap" href="catalog-item.html">
+                                                    <div class="c-card__img-ratio">
+                                                        <picture>
+                                                            <source media="(min-width: 2560px)" srcset="img/product-card-img-01--xxl.jpg 1x, img/product-card-img-01--xxl@2x.jpg 2x">
+                                                            <img class="c-card__img" src="img/product-card-img-01--xs.jpg" srcset="img/product-card-img-01--xs@2x.jpg 2x" width="728" height="546" alt="">
+                                                        </picture>
+                                                    </div>
+                                                </a>
+                                                <div class="c-card__content">
+                                                    <h3 class="c-card__title">
+                                                        <a class="c-card__title-link" href="catalog-item.html">Набор для склейки кролика&nbsp;L (белый)</a>
+                                                    </h3>
+                                                    <div class="c-card__footer">
+                                                        <div class="price price--c-card">
+                                                            <div class="price__value">1&nbsp;700<span class="price__unit">&nbsp;₽</span></div>
+                                                        </div>
+                                                        <div class="c-card__buttons">
+                                                            <!--todo: Если товар в сравнении, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--short btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 32 25" width="32" height="25">
+                                                                        <use xlink:href="img/sprite.svg#icon-compare"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">Сравнить</span>
+                                                            </button>
+                                                            <!--todo: Если товар в корзине, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--buy btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart"></use>
+                                                                    </svg>
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart-check"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">В корзину</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="catalog-list__col">
+                                            <div class="c-card c-card--model">
+                                                <a class="c-card__img-wrap" href="catalog-item.html">
+                                                    <div class="c-card__img-ratio">
+                                                        <picture>
+                                                            <source media="(min-width: 2560px)" srcset="img/product-card-img-01--xxl.jpg 1x, img/product-card-img-01--xxl@2x.jpg 2x">
+                                                            <img class="c-card__img" src="img/product-card-img-01--xs.jpg" srcset="img/product-card-img-01--xs@2x.jpg 2x" width="728" height="546" alt="">
+                                                        </picture>
+                                                    </div>
+                                                </a>
+                                                <div class="c-card__content">
+                                                    <h3 class="c-card__title">
+                                                        <a class="c-card__title-link" href="catalog-item.html">Набор для склейки кролика&nbsp;L (белый)</a>
+                                                    </h3>
+                                                    <div class="c-card__footer">
+                                                        <div class="price price--c-card">
+                                                            <div class="price__value">1&nbsp;700<span class="price__unit">&nbsp;₽</span></div>
+                                                        </div>
+                                                        <div class="c-card__buttons">
+                                                            <!--todo: Если товар в сравнении, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--short btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 32 25" width="32" height="25">
+                                                                        <use xlink:href="img/sprite.svg#icon-compare"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">Сравнить</span>
+                                                            </button>
+                                                            <!--todo: Если товар в корзине, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--buy btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart"></use>
+                                                                    </svg>
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart-check"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">В корзину</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="catalog-list__col">
+                                            <div class="c-card c-card--model">
+                                                <a class="c-card__img-wrap" href="catalog-item.html">
+                                                    <div class="c-card__img-ratio">
+                                                        <picture>
+                                                            <source media="(min-width: 2560px)" srcset="img/product-card-img-01--xxl.jpg 1x, img/product-card-img-01--xxl@2x.jpg 2x">
+                                                            <img class="c-card__img" src="img/product-card-img-01--xs.jpg" srcset="img/product-card-img-01--xs@2x.jpg 2x" width="728" height="546" alt="">
+                                                        </picture>
+                                                    </div>
+                                                </a>
+                                                <div class="c-card__content">
+                                                    <h3 class="c-card__title">
+                                                        <a class="c-card__title-link" href="catalog-item.html">Набор для склейки кролика&nbsp;L (белый)</a>
+                                                    </h3>
+                                                    <div class="c-card__footer">
+                                                        <div class="price price--c-card">
+                                                            <div class="price__value">1&nbsp;700<span class="price__unit">&nbsp;₽</span></div>
+                                                        </div>
+                                                        <div class="c-card__buttons">
+                                                            <!--todo: Если товар в сравнении, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--short btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 32 25" width="32" height="25">
+                                                                        <use xlink:href="img/sprite.svg#icon-compare"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">Сравнить</span>
+                                                            </button>
+                                                            <!--todo: Если товар в корзине, добавляем класс-модификатор btn-count--active у кнопки -->
+                                                            <button class="btn-count btn-count--buy btn-count--card" type="button">
+                                                                <div class="btn-count__icon-wrap">
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart"></use>
+                                                                    </svg>
+                                                                    <svg class="btn-count__icon" viewBox="0 0 22 19" width="22" height="19">
+                                                                        <use xlink:href="img/sprite.svg#icon-btn-cart-check"></use>
+                                                                    </svg>
+                                                                </div>
+                                                                <span class="btn-count__title">В корзину</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="preloader preloader--catalog">
+                                    <div class="preloader__spinner"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock %}

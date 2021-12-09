@@ -1,0 +1,502 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <main class="page__main">
+        <section class="main-banner">
+            <div class="main-banner__img-wrap">
+                <div class="main-banner__img-ratio">
+                    <picture>
+                        <source media="(min-width: 1440px)" srcset="{% static "img/main-banner-img-01--xl.jpg" %} 1x, {% static "img/main-banner-img-01--xl@2x.jpg" %} 2x">
+                        <source media="(min-width: 1024px)" srcset="{% static "img/main-banner-img-01--md.jpg" %} 1x, {% static "img/main-banner-img-01--md@2x.jpg" %} 2x">
+                        <source media="(min-width: 768px)" srcset="{% static "img/main-banner-img-01--sm.jpg" %} 1x, {% static "img/main-banner-img-01--sm@2x.jpg" %} 2x">
+                        <source media="(min-width: 0)" srcset="{% static "img/main-banner-img-01--xs.jpg" %} 1x, {% static "img/main-banner-img-01--xs@2x.jpg" %} 2x">
+                        <img class="main-banner__img" src="{% static "img/main-banner-img-01--xl.jpg" %}" srcset="{% static "img/main-banner-img-01--xl@2x.jpg" %} 2x" alt="">
+                    </picture>
+                </div>
+            </div>
+            <div class="main-banner__content-wrap">
+                <div class="main-banner__container">
+                    <div class="main-banner__row">
+                        <div class="main-banner__col">
+                            <div class="main-banner__content">
+                                <h1 class="main-banner__title">Склей свой трофей</h1>
+                                <p>Самые дорогие в&nbsp;мире вещи&nbsp;&mdash; вещи, сделанные своими руками для себя и&nbsp;в&nbsp;подарок близким. Склеить трофейную голову, используя наш конструктор, может каждый.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="intro">
+            <div class="intro__container">
+                <div class="intro__row">
+                    <div class="intro__col">
+                        <div class="intro__content">
+                            <div class="intro__img-wrap">
+                                <img class="intro__img" src="{% static "img/logo--full.svg" %}" alt="Polygonal Paper">
+                            </div>
+                            <h2 class="intro__title section-title">Скульптуры из бумаги своими руками</h2>
+                            <div class="intro__text">
+                                <p>Мы&nbsp;проектируем полигональные скульптуры. Первыми в&nbsp;России создали конструктор для сборки таких моделей и&nbsp;совершенствуем его с&nbsp;каждым годом. Из&nbsp;него любой взрослый человек в&nbsp;любой точке мира может создать произведение искусства.</p>
+                            </div>
+                            <div class="intro__btn-wrap">
+                                <a class="intro__btn btn-orb" href="javascript:void(0);">Смотреть каталог</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="float-sticker float-sticker--deer">
+                    <div class="float-sticker__img-wrap">
+                        <picture>
+                            <img class="float-sticker__img" src="{% static "img/float-sticker-01--xs.png" %}" srcset="{% static "img/float-sticker-01--xs@2x.png" %} 2x" alt="">
+                        </picture>
+                        <a class="float-sticker__btn btn-orb" href="javascript:void(0);">Посмотреть модель</a>
+                    </div>
+                </div>
+                <div class="float-sticker float-sticker--horse">
+                    <div class="float-sticker__img-wrap">
+                        <picture>
+                            <img class="float-sticker__img" src="{% static "img/float-sticker-02--xs.png" %}" srcset="{% static "img/float-sticker-02--xs@2x.png" %} 2x" alt="">
+                        </picture>
+                        <a class="float-sticker__btn btn-orb" href="javascript:void(0);">Посмотреть модель</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section__container">
+                <div class="section__row">
+                    <div class="section__col">
+                        <h2 class="section-title section-title--theme_blue">Магазин</h2>
+                        <div class="slider-wrapper">
+                            <div class="catalog-slider__btn-prev swiper-button-prev swiper-button-prev--theme_gray js-catalog-slider-btn-prev"></div>
+                            <div class="catalog-slider__btn-next swiper-button-next swiper-button-next--theme_gray js-catalog-slider-btn-next"></div>
+                            <div class="catalog-slider swiper-container js-catalog-slider">
+                                <div class="catalog-slider__wrapper swiper-wrapper">
+                                    <div class="catalog-slider__item swiper-slide">
+                                        <div class="c-card">
+                                            <a class="c-card__img-wrap" href="javascript:void(0);">
+                                                <div class="c-card__img-ratio">
+                                                    <picture>
+                                                        <source media="(min-width: 1280px)" srcset="{% static "img/c-card-img-01--lg.jpg" %} 1x, {% static "img/c-card-img-01--lg@2x.jpg" %} 2x">
+                                                        <source media="(min-width: 768px)" srcset="{% static "img/c-card-img-01--sm.jpg" %} 1x, {% static "img/c-card-img-01--sm@2x.jpg" %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static "img/c-card-img-01--xs.jpg" %} 1x, {% static "img/c-card-img-01--xs@2x.jpg" %} 2x">
+                                                        <img class="c-card__img" src="{% static "img/c-card-img-01--xs.jpg" %}" srcset="{% static "img/c-card-img-01--xs@2x.jpg" %} 2x" alt="">
+                                                    </picture>
+                                                </div>
+                                            </a>
+                                            <div class="c-card__content">
+                                                <h3 class="c-card__title">
+                                                    <a class="c-card__title-link" href="javascript:void(0);">Наборы для склейки</a>
+                                                </h3>
+                                                <div class="c-card__text text-content text-content--small">
+                                                    <p>В&nbsp;набор входят лучшие материалы и&nbsp;инструменты для создания скульптуры. Мы&nbsp;даже специально заказали разработку формулы клея, теперь в&nbsp;наборах идеальный клей для скульптур в&nbsp;технике papercraft.</p>
+                                                </div>
+                                                <a class="c-card__link" href="javascript:void(0);">Перейти в магазин</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="catalog-slider__item swiper-slide">
+                                        <div class="c-card">
+                                            <a class="c-card__img-wrap" href="javascript:void(0);">
+                                                <div class="c-card__img-ratio">
+                                                    <picture>
+                                                        <source media="(min-width: 1280px)" srcset="{% static "img/c-card-img-02--lg.jpg" %} 1x, {% static "img/c-card-img-02--lg@2x.jpg" %} 2x">
+                                                        <source media="(min-width: 768px)" srcset="{% static "img/c-card-img-02--sm.jpg" %} 1x, {% static "img/c-card-img-02--sm@2x.jpg" %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static "img/c-card-img-02--lg.jpg" %}img/c-card-img-02--xs.jpg 1x, {% static "img/c-card-img-02--xs@2x.jpg" %} 2x">
+                                                        <img class="c-card__img" src="{% static "img/c-card-img-02--xs.jpg" %}" srcset="{% static "img/c-card-img-02--xs@2x.jpg" %} 2x" alt="">
+                                                    </picture>
+                                                </div>
+                                            </a>
+                                            <div class="c-card__content">
+                                                <h3 class="c-card__title">
+                                                    <a class="c-card__title-link" href="javascript:void(0);">Чертежи для бумаги</a>
+                                                </h3>
+                                                <div class="c-card__text text-content text-content--small">
+                                                    <p>В&nbsp;формате PDF для печати на&nbsp;принтере и&nbsp;резки вручную, а&nbsp;также в&nbsp;формате DXF для резки на&nbsp;личном плоттере. Чертежи и&nbsp;инструкции подготовлены так, чтобы собрать скульптуру мог любой взрослый человек.</p>
+                                                </div>
+                                                <a class="c-card__link" href="javascript:void(0);">Перейти в магазин</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="catalog-slider__item swiper-slide">
+                                        <div class="c-card">
+                                            <a class="c-card__img-wrap" href="javascript:void(0);">
+                                                <div class="c-card__img-ratio">
+                                                    <picture>
+                                                        <source media="(min-width: 1280px)" srcset="{% static "img/c-card-img-03--lg.jpg" %} 1x, {% static "img/c-card-img-03--lg@2x.jpg" %} 2x">
+                                                        <source media="(min-width: 768px)" srcset="{% static "img/c-card-img-03--sm.jpg" %} 1x, {% static "img/c-card-img-03--sm@2x.jpg" %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static "img/c-card-img-03--xs.jpg" %} 1x, {% static "img/c-card-img-03--xs@2x.jpg" %} 2x">
+                                                        <img class="c-card__img" src="{% static "img/c-card-img-03--xs.jpg" %}" srcset="{% static "img/c-card-img-03--xs@2x.jpg" %} 2x" alt="">
+                                                    </picture>
+                                                </div>
+                                            </a>
+                                            <div class="c-card__content">
+                                                <h3 class="c-card__title">
+                                                    <a class="c-card__title-link" href="javascript:void(0);">Готовые фигуры</a>
+                                                </h3>
+                                                <div class="c-card__text text-content text-content--small">
+                                                    <p>Изготовим любую скульптуру на&nbsp;заказ из&nbsp;бумаги, микрогофрокартона или подготовим чертежи для наших партнёров, которые соберут модель из&nbsp;металла.</p>
+                                                </div>
+                                                <a class="c-card__link" href="javascript:void(0);">Перейти в магазин</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="catalog-slider__item swiper-slide">
+                                        <div class="c-card">
+                                            <a class="c-card__img-wrap" href="javascript:void(0);">
+                                                <div class="c-card__img-ratio">
+                                                    <picture>
+                                                        <source media="(min-width: 1280px)" srcset="{% static "img/c-card-img-04--lg.jpg" %} 1x, {% static "img/c-card-img-04--lg@2x.jpg" %} 2x">
+                                                        <source media="(min-width: 768px)" srcset="{% static "img/c-card-img-04--sm.jpg" %} 1x, {% static "img/c-card-img-04--sm@2x.jpg" %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static "img/c-card-img-04--xs.jpg" %} 1x, {% static "img/c-card-img-04--xs@2x.jpg" %} 2x">
+                                                        <img class="c-card__img" src="{% static "img/c-card-img-04--xs.jpg" %}" srcset="{% static "img/c-card-img-04--xs@2x.jpg" %} 2x" alt="">
+                                                    </picture>
+                                                </div>
+                                            </a>
+                                            <div class="c-card__content">
+                                                <h3 class="c-card__title">
+                                                    <a class="c-card__title-link" href="javascript:void(0);">Чертежи для металла</a>
+                                                </h3>
+                                                <div class="c-card__text text-content text-content--small">
+                                                    <p>Для листа толщиной 1,5&nbsp;мм. В&nbsp;комплекте чертежи для лазерной резки, те&nbsp;же детали в&nbsp;формате PDF с&nbsp;указанием углов сгиба для работы с&nbsp;листогибочным станком и&nbsp;инструкция.</p>
+                                                </div>
+                                                <a class="c-card__link" href="javascript:void(0);">Перейти в магазин</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="catalog-slider__item swiper-slide">
+                                        <div class="c-card">
+                                            <a class="c-card__img-wrap" href="javascript:void(0);">
+                                                <div class="c-card__img-ratio">
+                                                    <picture>
+                                                        <source media="(min-width: 1280px)" srcset="{% static "img/c-card-img-01--lg.jpg" %} 1x, {% static "img/c-card-img-01--lg@2x.jpg" %} 2x">
+                                                        <source media="(min-width: 768px)" srcset="{% static "img/c-card-img-01--sm.jpg" %} 1x, {% static "img/c-card-img-01--sm@2x.jpg" %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static "img/c-card-img-01--xs.jpg" %} 1x, {% static "img/c-card-img-01--xs@2x.jpg" %} 2x">
+                                                        <img class="c-card__img" src="{% static "img/c-card-img-01--xs.jpg" %}" srcset="{% static "img/c-card-img-01--xs@2x.jpg" %} 2x" alt="">
+                                                    </picture>
+                                                </div>
+                                            </a>
+                                            <div class="c-card__content">
+                                                <h3 class="c-card__title">
+                                                    <a class="c-card__title-link" href="javascript:void(0);">Наборы для склейки</a>
+                                                </h3>
+                                                <div class="c-card__text text-content text-content--small">
+                                                    <p>В&nbsp;набор входят лучшие материалы и&nbsp;инструменты для создания скульптуры. Мы&nbsp;даже специально заказали разработку формулы клея, теперь в&nbsp;наборах идеальный клей для скульптур в&nbsp;технике papercraft.</p>
+                                                </div>
+                                                <a class="c-card__link" href="javascript:void(0);">Перейти в магазин</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="catalog-slider__pagination swiper-pagination js-catalog-slider-pagination"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section__container">
+                <div class="section__row">
+                    <div class="section__col">
+                        <div class="promo-lite">
+                            <div class="promo-lite__row">
+                                <div class="promo-lite__col">
+                                    <div class="promo-lite__img-wrap">
+                                        <picture>
+                                            <source media="(min-width: 0)" srcset="{% static "img/promo-lite-img-01--xs.jpg" %} 1x, {% static "img/promo-lite-img-01--xs@2x.jpg" %} 2x">
+                                            <img class="promo-lite__img" src="{% static "img/promo-lite-img-01--xs.jpg" %}" srcset="{% static "img/promo-lite-img-01--xs@2x.jpg" %} 2x" alt="">
+                                        </picture>
+                                    </div>
+                                    <h2 class="promo-lite__title">Мы&nbsp;годимся своей работой</h2>
+                                    <div class="promo-lite__text text-content">
+                                        <p>С&nbsp;каждой новой моделью мы&nbsp;стараемся быть лучше. Предлагаем вам собрать промо-модель по&nbsp;нашему чертежу совершенно бесплатно, чтобы оценить уровень работы.</p>
+                                    </div>
+                                    <a class="download-link" href="{% static "img/docs/document-01.pdf" %}" download="Модель головы волка">
+                                        <span class="download-link__title">Модель головы волка</span>
+                                        <span class="download-link__tip">
+													<span class="download-link__tip-unit">pdf</span>,&nbsp;<span>15 Мб</span>
+												</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="float-sticker float-sticker--unicorn">
+                    <div class="float-sticker__img-wrap">
+                        <picture>
+                            <img class="float-sticker__img" src="{% static "img/float-sticker-03--xs.png" %}" srcset="{% static "img/float-sticker-03--xs@2x.png" %} 2x" alt="">
+                        </picture>
+                        <a class="float-sticker__btn btn-orb" href="javascript:void(0);">Посмотреть модель</a>
+                    </div>
+                </div>
+                <div class="float-sticker float-sticker--elephant">
+                    <div class="float-sticker__img-wrap">
+                        <picture>
+                            <img class="float-sticker__img" src="{% static "img/float-sticker-04--xs.png" %}" srcset="{% static "img/float-sticker-04--xs@2x.png" %} 2x" alt="">
+                        </picture>
+                        <a class="float-sticker__btn btn-orb" href="javascript:void(0);">Посмотреть модель</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section__container">
+                <div class="section__row">
+                    <div class="section__col">
+                        <div class="promo">
+                            <div class="promo__bg-wrap">
+                                <img class="promo__bg-img" src="{% static "img/bg-logo.svg" %}" alt="">
+                            </div>
+                            <div class="promo__row">
+                                <div class="promo__col">
+                                    <h2 class="section-title section-title--theme_blue">Проект на заказ</h2>
+                                    <div class="promo__img-wrap">
+                                        <div class="promo__img-ratio">
+                                            <picture>
+                                                <source media="(min-width: 1024px)" srcset="{% static "img/promo-img-01--md.jpg" %} 1x, {% static "img/promo-img-01--md@2x.jpg" %} 2x">
+                                                <source media="(min-width: 0)" srcset="{% static "img/promo-img-01--xs.jpg" %} 1x, {% static "img/promo-img-01--xs@2x.jpg" %} 2x">
+                                                <img class="promo__img" src="{% static "img/promo-img-01--md.jpg" %}" srcset="{% static "img/promo-img-01--md@2x.jpg" %} 2x" alt="">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="promo__content">
+                                        <ul class="promo-list">
+                                            <li class="promo-list__item text-content text-content--small">
+                                                <p>Cделаем проект любой скульптуры на&nbsp;заказ&nbsp;&mdash; будь&nbsp;то маска, фигура животного в&nbsp;полный рост или модель для детского творчества</p>
+                                            </li>
+                                            <li class="promo-list__item text-content text-content--small">
+                                                <p>Подготовим чертежи для изготовления из&nbsp;любого материала. Например, чертежи для изготовления модели из&nbsp;металла будут выполнены с&nbsp;учётом растяжения при изгибе, толщины материала и&nbsp;последовательности сварки.</p>
+                                            </li>
+                                            <li class="promo-list__item text-content text-content--small">
+                                                <p>Произведём тираж наборов для творчества на&nbsp;основе нашего проекта, сделаем упаковку в&nbsp;вашем фирменном стиле</p>
+                                            </li>
+                                        </ul>
+                                        <div class="promo__link-wrap">
+                                            <a class="promo__link" href="javascript:void(0);">Последние работы</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section__container">
+                <div class="section__row">
+                    <div class="section__col">
+                        <h2 class="section-title">Наши авторы</h2>
+                        <div class="slider-wrapper slider-wrapper--dual">
+                            <div class="d-slider">
+                                <div class="d-slider__btn-prev swiper-button-prev"></div>
+                                <div class="d-slider__btn-next swiper-button-next"></div>
+                                <div class="d-slider-text d-slider__d-slider-text swiper-container js-d-slider-text">
+                                    <div class="d-slider-text__wrapper swiper-wrapper">
+                                        <div class="d-slider-text__item swiper-slide">
+                                            <div class="d-slider-text__row">
+                                                <div class="d-slider-text__col">
+                                                    <div class="d-slider-text__content">
+                                                        <h3 class="d-slider-text__title">Наталья Погудина</h3>
+                                                        <div class="d-slider-text__desc">Основатель компании</div>
+                                                        <div class="d-slider-text__text text-content text-content--small">
+                                                            <p>Первую трофейную голову я&nbsp;спроектировала в&nbsp;2013&nbsp;году. Опубликовала её&nbsp;фотографию в&nbsp;своём портфолио, и&nbsp;мне неожиданно начали писать люди из&nbsp;разных стран с&nbsp;просьбой показать как это делается. Тогда я&nbsp;решила превратить свою разработку в&nbsp;конструктор, с&nbsp;помощью которого любой желающий сможет воспроизвести модель.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-slider-text__item swiper-slide">
+                                            <div class="d-slider-text__row">
+                                                <div class="d-slider-text__col">
+                                                    <div class="d-slider-text__content">
+                                                        <h3 class="d-slider-text__title">Наталья Погудина</h3>
+                                                        <div class="d-slider-text__desc">Основатель компании</div>
+                                                        <div class="d-slider-text__text text-content text-content--small">
+                                                            <p>Первую трофейную голову я&nbsp;спроектировала в&nbsp;2013&nbsp;году. Опубликовала её&nbsp;фотографию в&nbsp;своём портфолио, и&nbsp;мне неожиданно начали писать люди из&nbsp;разных стран с&nbsp;просьбой показать как это делается. Тогда я&nbsp;решила превратить свою разработку в&nbsp;конструктор, с&nbsp;помощью которого любой желающий сможет воспроизвести модель.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-slider-text__item swiper-slide">
+                                            <div class="d-slider-text__row">
+                                                <div class="d-slider-text__col">
+                                                    <div class="d-slider-text__content">
+                                                        <h3 class="d-slider-text__title">Наталья Погудина</h3>
+                                                        <div class="d-slider-text__desc">Основатель компании</div>
+                                                        <div class="d-slider-text__text text-content text-content--small">
+                                                            <p>Первую трофейную голову я&nbsp;спроектировала в&nbsp;2013&nbsp;году. Опубликовала её&nbsp;фотографию в&nbsp;своём портфолио, и&nbsp;мне неожиданно начали писать люди из&nbsp;разных стран с&nbsp;просьбой показать как это делается. Тогда я&nbsp;решила превратить свою разработку в&nbsp;конструктор, с&nbsp;помощью которого любой желающий сможет воспроизвести модель.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-slider-img d-slider__d-slider-img swiper-container js-d-slider-img">
+                                    <div class="d-slider-img__wrapper swiper-wrapper">
+                                        <div class="d-slider-img__item swiper-slide">
+                                            <div class="d-slider-img__img-wrap">
+                                                <div class="d-slider-img__img-ratio">
+                                                    <picture>
+                                                        <source media="(min-width: 1280px)" srcset="{% static 'img/d-slider-img-01--lg.jpg' %} 1x, {% static 'img/d-slider-img-01--lg@2x.jpg' %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static 'img/d-slider-img-01--xs.jpg' %} 1x, {% static 'img/d-slider-img-01--xs@2x.jpg 2x' %}">
+                                                        <img class="d-slider-img__img" src="{% static 'img/d-slider-img-01--lg.jpg' %}" srcset="{% static 'img/d-slider-img-01--lg@2x.jpg' %} 2x" alt="">
+                                                    </picture>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-slider-img__item swiper-slide">
+                                            <div class="d-slider-img__img-wrap">
+                                                <div class="d-slider-img__img-ratio">
+                                                    <picture>
+                                                        <source media="(min-width: 1280px)" srcset="{% static 'img/d-slider-img-01--lg.jpg' %} 1x, {% static 'img/d-slider-img-01--lg@2x.jpg' %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static 'img/d-slider-img-01--xs.jpg' %} 1x, {% static 'img/d-slider-img-01--xs@2x.jpg' %} 2x">
+                                                        <img class="d-slider-img__img" src="{% static 'img/d-slider-img-01--lg.jpg' %}" srcset="{% static 'img/d-slider-img-01--lg@2x.jpg 2x' %}" alt="">
+                                                    </picture>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-slider-img__item swiper-slide">
+                                            <div class="d-slider-img__img-wrap">
+                                                <div class="d-slider-img__img-ratio">
+                                                    <picture>
+                                                        <source media="(min-width: 1280px)" srcset="{% static 'img/d-slider-img-01--lg.jpg' %} 1x, {% static 'img/d-slider-img-01--lg@2x.jpg' %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static 'img/d-slider-img-01--xs.jpg' %} 1x, {% static 'img/d-slider-img-01--xs@2x.jpg' %} 2x">
+                                                        <img class="d-slider-img__img" src="{% static 'img/d-slider-img-01--lg.jpg' %}" srcset="{% static 'img/d-slider-img-01--lg@2x.jpg 2x' %}" alt="">
+                                                    </picture>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-slider__pagination swiper-pagination"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section__container">
+                <div class="section__row">
+                    <div class="section__col">
+                        <div class="insta-gallery">
+                            <div class="insta-gallery__row">
+                                <div class="insta-gallery__col">
+                                    <a class="insta-gallery__link" href="javascript:void(0);" target="_blank">
+                                        <div class="insta-gallery__link-avatar">
+                                            <picture>
+                                                <source media="(min-width: 0)" srcset="{% static 'img/insta-gallery-avatar-img-01--xs.jpg' %} 1x, {% static 'img/insta-gallery-avatar-img-01--xs@2x.jpg' %} 2x">
+                                                <img class="insta-gallery__link-avatar-img" src="{% static 'img/insta-gallery-avatar-img-01--xs.jpg' %}" srcset="{% static 'img/insta-gallery-avatar-img-01--xs@2x.jpg' %} 2x" alt="">
+                                            </picture>
+                                        </div>
+                                        <div class="insta-gallery__link-title">@polygonal_paper</div>
+                                    </a>
+                                    <ul class="insta-list">
+                                        <li class="insta-list__item">
+                                            <a class="insta-list__link" href="javascript:void(0);" target="_blank">
+                                                <div class="insta-list__img-wrap">
+                                                    <picture>
+                                                        <source media="(min-width: 768px)" srcset="{% static 'img/insta-list-img-01--sm.jpg' %} 1x, {% static 'img/insta-list-img-01--sm@2x.jpg' %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static 'img/insta-list-img-01--xs.jpg' %} 1x, {% static 'img/insta-list-img-01--xs@2x.jpg' %} 2x">
+                                                        <img class="insta-list__img" src="{% static 'img/insta-list-img-01--xs.jpg' %}" srcset="{% static 'img/insta-list-img-01--xs@2x.jpg' %} 2x" alt="">
+                                                    </picture>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="insta-list__item">
+                                            <a class="insta-list__link" href="javascript:void(0);" target="_blank">
+                                                <div class="insta-list__img-wrap">
+                                                    <picture>
+                                                        <source media="(min-width: 768px)" srcset="{% static 'img/insta-list-img-02--sm.jpg' %} 1x, {% static 'img/insta-list-img-02--sm@2x.jpg' %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static 'img/insta-list-img-02--xs.jpg' %} 1x, {% static 'img/insta-list-img-02--xs@2x.jpg' %} 2x">
+                                                        <img class="insta-list__img" src="{% static 'img/insta-list-img-02--xs.jpg' %}" srcset="{% static 'img/insta-list-img-02--xs@2x.jpg' %} 2x" alt="">
+                                                    </picture>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="insta-list__item">
+                                            <a class="insta-list__link" href="javascript:void(0);" target="_blank">
+                                                <div class="insta-list__img-wrap">
+                                                    <picture>
+                                                        <source media="(min-width: 768px)" srcset="{% static 'img/insta-list-img-03--sm.jpg' %} 1x, {% static 'img/insta-list-img-03--sm@2x.jpg' %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static 'img/insta-list-img-03--xs.jpg' %} 1x, {% static 'img/insta-list-img-03--xs@2x.jpg' %} 2x">
+                                                        <img class="insta-list__img" src="{% static 'img/insta-list-img-03--xs.jpg' %}" srcset="{% static 'img/insta-list-img-03--xs@2x.jpg' %} 2x" alt="">
+                                                    </picture>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="insta-list__item">
+                                            <a class="insta-list__link" href="javascript:void(0);" target="_blank">
+                                                <div class="insta-list__img-wrap">
+                                                    <picture>
+                                                        <source media="(min-width: 768px)" srcset="{% static 'img/insta-list-img-04--sm.jpg' %} 1x, {% static 'img/insta-list-img-04--sm@2x.jpg' %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static 'img/insta-list-img-04--xs.jpg' %} 1x, {% static 'img/insta-list-img-04--xs@2x.jpg' %} 2x">
+                                                        <img class="insta-list__img" src="{% static 'img/insta-list-img-04--xs.jpg' %}" srcset="{% static 'img/insta-list-img-04--xs@2x.jpg' %} 2x" alt="">
+                                                    </picture>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="insta-list__item">
+                                            <a class="insta-list__link" href="javascript:void(0);" target="_blank">
+                                                <div class="insta-list__img-wrap">
+                                                    <picture>
+                                                        <source media="(min-width: 768px)" srcset="{% static 'img/insta-list-img-05--sm.jpg' %} 1x, {% static 'img/insta-list-img-05--sm@2x.jpg' %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static 'img/insta-list-img-05--xs.jpg' %} 1x, {% static 'img/insta-list-img-05--xs@2x.jpg' %} 2x">
+                                                        <img class="insta-list__img" src="{% static 'img/insta-list-img-05--xs.jpg' %}" srcset="{% static 'img/insta-list-img-05--xs@2x.jpg' %} 2x" alt="">
+                                                    </picture>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="insta-list__item">
+                                            <a class="insta-list__link" href="javascript:void(0);" target="_blank">
+                                                <div class="insta-list__img-wrap">
+                                                    <picture>
+                                                        <source media="(min-width: 768px)" srcset="{% static 'img/insta-list-img-06--sm.jpg' %} 1x, {% static 'img/insta-list-img-06--sm@2x.jpg' %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static 'img/insta-list-img-06--xs.jpg' %} 1x, {% static 'img/insta-list-img-06--xs@2x.jpg' %} 2x">
+                                                        <img class="insta-list__img" src="{% static 'img/insta-list-img-06--xs.jpg' %}" srcset="{% static 'img/insta-list-img-06--xs@2x.jpg' %} 2x" alt="">
+                                                    </picture>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="insta-list__item">
+                                            <a class="insta-list__link" href="javascript:void(0);" target="_blank">
+                                                <div class="insta-list__img-wrap">
+                                                    <picture>
+                                                        <source media="(min-width: 768px)" srcset="{% static 'img/insta-list-img-07--sm.jpg' %} 1x, {% static 'img/insta-list-img-07--sm@2x.jpg' %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static 'img/insta-list-img-07--xs.jpg' %} 1x, {% static 'img/insta-list-img-07--xs@2x.jpg 2x' %}">
+                                                        <img class="insta-list__img" src="{% static 'img/insta-list-img-07--xs.jpg' %}" srcset="{% static 'img/insta-list-img-07--xs@2x.jpg 2x' %}" alt="">
+                                                    </picture>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="insta-list__item">
+                                            <a class="insta-list__link" href="javascript:void(0);" target="_blank">
+                                                <div class="insta-list__img-wrap">
+                                                    <picture>
+                                                        <source media="(min-width: 768px)" srcset="{% static 'img/insta-list-img-08--sm.jpg' %} 1x, {% static 'img/insta-list-img-08--sm@2x.jpg' %} 2x">
+                                                        <source media="(min-width: 0)" srcset="{% static 'img/insta-list-img-08--xs.jpg' %} 1x, {% static 'img/insta-list-img-08--xs@2x.jpg' %} 2x">
+                                                        <img class="insta-list__img" src="{% static 'img/insta-list-img-08--xs.jpg' %}" srcset="{% static 'img/insta-list-img-08--xs@2x.jpg' %} 2x" alt="">
+                                                    </picture>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock %}
